@@ -1,0 +1,32 @@
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration>
+    <appender name = "console" class="org.apache.log4j.ConsoleAppender"><!--логи будут выводится в консоль-->
+        <param name="target" value="System.out"/><!-- через System.out-->
+
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="conversionPattern" value="{%d{HH:mm:ss:SSS}] %p [%c: %L] %m%n"/>
+<!-- паттерн для выведения логов: [время]-уровень логирования(error, trace, info etc)-[класс-строка кода]-сообщение об ошибке-->
+        </layout>
+    </appender>
+    <appender name="file" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="hibernate-starter.log"/><!--название файла-->
+        
+        <param name="append" value="true"/>
+        <param name="maxFileSize" value="10MB"/>
+        <param name="maxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="conversionPattern" value="{%d{HH:mm:ss:SSS}] %p [%c: %L] %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="ALL"/>
+        </filter>
+        
+    </appender>
+    
+    <root>
+        <level value="info"/><!--уровень логирования-->
+        <appender-ref ref="console"/><!--какие аппендеры истпользуем-->
+        <appender-ref ref="file"/><!--какие аппендеры истпользуем-->
+    </root>
+</log4j:configuration>
